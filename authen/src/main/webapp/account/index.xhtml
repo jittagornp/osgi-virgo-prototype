@@ -15,12 +15,6 @@
 
     </h:head>
     <h:body>
-        <form method="post" action="#{facesContext.externalContext.requestContextPath}/signin">
-            username <input name="username" type="text"/>
-            <br/>
-            password <input name="password" type="password"/>
-            <br/>
-            <button>signin</button>
-        </form>
+        #{facesContext.externalContext.userPrincipal.name}
     </h:body>
 </html>
