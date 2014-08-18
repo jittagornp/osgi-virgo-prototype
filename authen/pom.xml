@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>osgi-virgo-prototype</artifactId>
+        <groupId>th.co.geniustree.osgi.prototype</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>th.co.geniustree.osgi.prototype</groupId>
+    <artifactId>authen</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>authen</name>
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.5.0</version>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <supportedProjectTypes>
+                        <supportedProjectType>jar</supportedProjectType>
+                        <supportedProjectType>bundle</supportedProjectType>
+                        <supportedProjectType>war</supportedProjectType>
+                    </supportedProjectTypes>
+                    <instructions>
+                        <Web-ContextPath>/authen</Web-ContextPath>
+                        <Import-Package>
+                            org.springframework.web,
+                            org.springframework.web.context,
+                            org.springframework.web.context.request,
+                            org.springframework.web.filter,
+                            org.springframework.web.jsf.el,
+                            org.springframework.stereotype,
+                            org.springframework.context.annotation,
+                            
+                            org.eclipse.virgo.web.dm,
+                            
+                            javax.servlet, 
+                            javax.servlet.http,
+                            javax.faces.webapp,
+                            javax.enterprise.context,
+                            javax.faces.application,                             
+                            javax.faces.component,
+                            javax.faces.event,
+                            javax.faces.bean,
+                            javax.faces.component.html,
+                            
+                            com.sun.faces.config,
+                            com.sun.faces.application,
+                            com.sun.faces.context,
+                            com.sun.faces.lifecycle,
+                            com.sun.faces.application.view,
+                            com.sun.faces.renderkit,
+                            com.sun.faces.component.visit,
+                            com.sun.faces.facelets.impl,
+                            com.sun.faces.facelets.tag.jsf,
+                            com.sun.faces.application.resource,
+                            com.sun.faces.ext.render,
+                            com.sun.faces.facelets.component,
+                            com.sun.faces.renderkit.html_basic,
+                            com.sun.faces.vendor
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <repositories>
+        <repository>
+            <url>http://repository.primefaces.org/</url>
+            <id>PrimeFaces-maven-lib</id>
+            <layout>default</layout>
+            <name>Repository for library PrimeFaces-maven-lib</name>
+        </repository>
+    </repositories>
+</project>
