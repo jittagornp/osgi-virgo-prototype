@@ -17,6 +17,9 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.java-version>1.6</project.java-version>
+        <org.springframework-version>3.1.0.RELEASE</org.springframework-version>
+        <org.springframework.security-version>3.1.0.RELEASE</org.springframework.security-version>
     </properties>
 
     <dependencies>
@@ -31,17 +34,126 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- spring ******************************************************** -->           
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework-version}</version>
+            <type>jar</type>
+        </dependency>
+      
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version}</version>
+            <type>jar</type>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>spring-core</artifactId>
+            <groupId>org.springframework</groupId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework-version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        
+        <!-- spring security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-acl</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+        <!-- spring security -->
+        
+        <!-- spring ******************************************************** --> 
     </dependencies>
 
     <build>
+        <finalName>central-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${project.java-version}</source>
+                    <target>${project.java-version}</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -79,26 +191,51 @@
                     </supportedProjectTypes>
                     <instructions>
                         <Web-ContextPath>/central</Web-ContextPath>
+                        <Export-Package>
+                            th.co.geniustree.osgi.prototype.central.security
+                        </Export-Package>
                         <Import-Package>
                             org.springframework.web,
                             org.springframework.web.context,
-                            org.springframework.web.context.request,
                             org.springframework.web.filter,
                             org.springframework.web.jsf.el,
-                            org.springframework.stereotype,
+                            org.springframework.web.context.request,
+                            org.springframework.context.config,
                             org.springframework.context.annotation,
+                            org.springframework.stereotype,
+                            org.springframework.beans.factory,
+                            org.springframework.beans.factory.xml,
+                            org.springframework.security,
+                            org.springframework.security.config,
+                            org.springframework.security.web,
+                            org.springframework.security.web.session,
+                            org.springframework.security.web.authentication,
+                            org.springframework.security.core.userdetails,
+                            org.springframework.security.authentication,
+                            org.springframework.security.authentication.dao,
                             
                             org.eclipse.virgo.web.dm,
                             
+                            javax.el,
                             javax.servlet, 
                             javax.servlet.http,
-                            javax.faces.webapp,
                             javax.enterprise.context,
+                            
+                            javax.faces,
+                            javax.faces.webapp,
                             javax.faces.application,                             
-                            javax.faces.component,
                             javax.faces.event,
                             javax.faces.bean,
+                            javax.faces.convert,
+                            javax.faces.context,
+                            javax.faces.component,
                             javax.faces.component.html,
+                            javax.faces.component.behavior,
+                            javax.faces.component.visit,
+                            javax.faces.model,
+                            javax.faces.render,
+                            javax.faces.view,
+                            javax.faces.view.facelets,
                             
                             com.sun.faces.config,
                             com.sun.faces.application,
@@ -115,9 +252,36 @@
                             com.sun.faces.renderkit.html_basic,
                             com.sun.faces.vendor
                         </Import-Package>
+                        <Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
                     </instructions>
                 </configuration>
             </plugin>
+            
+            <!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
         </plugins>
     </build>
     
