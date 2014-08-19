@@ -23,13 +23,13 @@
         
         <logout logout-success-url="/" 
                 logout-url="http://localhost:8080/authen/signout"/>
-        <form-login login-page="http://localhost:8080/authen/"
+        <form-login login-page="http://localhost:8080/authen/?redirect_url=http://localhost:8080/central/"
                     login-processing-url="http://localhost:8080/authen/signin"
                     default-target-url="/"
                     password-parameter="password"
                     username-parameter="username"/>
     </http>
-    
+
     <beans:bean id="userDetailsService" class="th.co.geniustree.osgi.prototype.central.security.UserDetailsServiceImpl"/>
     
     <authentication-manager alias="authenManager">

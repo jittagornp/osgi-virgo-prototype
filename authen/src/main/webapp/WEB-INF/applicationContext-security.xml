@@ -24,13 +24,13 @@
         <logout logout-success-url="/" 
                 logout-url="/signout"/>
         <form-login login-page="/"
+                    authentication-success-handler-ref="authenSuccessHandler"
                     login-processing-url="/signin"
-                    default-target-url="/account"
-                    always-use-default-target="true"
                     password-parameter="password"
                     username-parameter="username"/>
     </http>
     
+    <beans:bean id="authenSuccessHandler" class="th.co.geniustree.osgi.prototype.authen.security.AuthenSuccessHandlerImpl"/>
     <beans:bean id="userDetailsService" class="th.co.geniustree.osgi.prototype.authen.security.UserDetailsServiceImpl"/>
     
     <authentication-manager alias="authenManager">

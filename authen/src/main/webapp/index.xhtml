@@ -15,7 +15,7 @@
 
     </h:head>
     <h:body>
-        <form method="post" action="#{facesContext.externalContext.requestContextPath}/signin">
+        <form method="post" action="#{facesContext.externalContext.requestContextPath}/signin?redirect_url=${request.getParameter('redirect_url')}">
             username <input name="username" type="text"/>
             <br/>
             password <input name="password" type="password"/>

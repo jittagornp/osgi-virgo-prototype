@@ -24,10 +24,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>authen-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>4.0</version>
         </dependency>
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -195,6 +202,7 @@
                             th.co.geniustree.osgi.prototype.authen.security
                         </Export-Package>
                         <Import-Package>
+                            org.springframework.util,
                             org.springframework.web,
                             org.springframework.web.context,
                             org.springframework.web.filter,
@@ -210,6 +218,7 @@
                             org.springframework.security.web,
                             org.springframework.security.web.session,
                             org.springframework.security.web.authentication,
+                            org.springframework.security.core,
                             org.springframework.security.core.userdetails,
                             org.springframework.security.authentication,
                             org.springframework.security.authentication.dao,
@@ -250,7 +259,10 @@
                             com.sun.faces.ext.render,
                             com.sun.faces.facelets.component,
                             com.sun.faces.renderkit.html_basic,
-                            com.sun.faces.vendor
+                            com.sun.faces.vendor,
+                            
+                            org.apache.commons.logging,
+                            th.co.geniustree.osgi.prototype.authen.api
                         </Import-Package>
                         <Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
                     </instructions>
