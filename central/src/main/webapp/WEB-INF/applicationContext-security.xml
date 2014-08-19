@@ -19,11 +19,11 @@
            authentication-manager-ref="authenManager"
            auto-config="true">
 
-        <intercept-url pattern="/*" access="isAuthenticated()" />
+        <intercept-url pattern="/private/*" access="isAuthenticated()" />
         
         <logout logout-success-url="/" 
                 logout-url="http://localhost:8080/authen/signout"/>
-        <form-login login-page="http://localhost:8080/authen/?redirect_url=http://localhost:8080/central/"
+        <form-login login-page="http://localhost:8080/authen/?redirect_url=http://localhost:8080/central/authen/"
                     login-processing-url="http://localhost:8080/authen/signin"
                     default-target-url="/"
                     password-parameter="password"

@@ -24,6 +24,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>authen-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>4.0</version>
@@ -192,7 +198,7 @@
                     <instructions>
                         <Web-ContextPath>/central</Web-ContextPath>
                         <Export-Package>
-                            th.co.geniustree.osgi.prototype.central.security
+                            th.co.geniustree.osgi.prototype.*
                         </Export-Package>
                         <Import-Package>
                             org.springframework.web,
@@ -200,6 +206,7 @@
                             org.springframework.web.filter,
                             org.springframework.web.jsf.el,
                             org.springframework.web.context.request,
+                            org.springframework.security.core,
                             org.springframework.context.config,
                             org.springframework.context.annotation,
                             org.springframework.stereotype,
@@ -250,7 +257,9 @@
                             com.sun.faces.ext.render,
                             com.sun.faces.facelets.component,
                             com.sun.faces.renderkit.html_basic,
-                            com.sun.faces.vendor
+                            com.sun.faces.vendor,
+                            
+                            th.co.geniustree.osgi.prototype.authen.api
                         </Import-Package>
                         <Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
                     </instructions>
