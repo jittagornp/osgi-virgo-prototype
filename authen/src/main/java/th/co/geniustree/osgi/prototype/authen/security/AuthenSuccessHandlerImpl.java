@@ -8,7 +8,6 @@ package th.co.geniustree.osgi.prototype.authen.security;
 import th.co.geniustree.osgi.prototype.authen.api.AuthenService;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,7 +54,7 @@ public class AuthenSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
-                return Collections.EMPTY_LIST;
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
