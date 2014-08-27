@@ -17,20 +17,28 @@ import th.co.geniustree.osgi.prototype.authen.api.AuthenService;
  *
  * @author anonymous
  */
-@Component
-@Scope("session")
-public class AuthenController implements Serializable{
+//@Component
+//@Scope("session")
+public class AuthenController implements Serializable {
 
-    @Autowired
+    //@Autowired
     private AuthenService authenService;
     private Authentication authentication;
+    private String sessionId;
+
+    public void setAuthenService(AuthenService authenService) {
+        this.authenService = authenService;
+    }
 
     public void reset() {
-        String sessionId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sessionId");
+        sessionId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sessionId");
         if (sessionId != null) {
             authentication = authenService.findAuthenticationBySessionId(sessionId);
-            System.out.println("authentication " + authentication.getName());
         }
+    }
+
+    public String getSessionId() {
+        return sessionId;
     }
 
     public Authentication getAuthentication() {

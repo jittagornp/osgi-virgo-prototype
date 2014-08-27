@@ -4,12 +4,15 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:util="http://www.springframework.org/schema/util"
              xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:osgi="http://www.springframework.org/schema/osgi"
              xsi:schemaLocation="http://www.springframework.org/schema/beans 
                  http://www.springframework.org/schema/beans/spring-beans.xsd
                  http://www.springframework.org/schema/security 
                  http://www.springframework.org/schema/security/spring-security.xsd
                  http://www.springframework.org/schema/util 
                  http://www.springframework.org/schema/util/spring-util.xsd
+                 http://www.springframework.org/schema/osgi
+                           http://www.springframework.org/schema/osgi/spring-osgi.xsd
                  http://www.springframework.org/schema/context 
                  http://www.springframework.org/schema/context/spring-context.xsd">
  
@@ -30,7 +33,9 @@
                     username-parameter="username"/>
     </http>
     
-    <beans:bean id="authenService" class="th.co.geniustree.osgi.prototype.authen.api.AuthenServiceImpl"/>
+    <osgi:reference id="authenService" 
+                    interface="th.co.geniustree.osgi.prototype.authen.api.AuthenService" 
+                    availability="mandatory"/>
     
     <beans:bean id="authenSuccessHandler" class="th.co.geniustree.osgi.prototype.authen.security.AuthenSuccessHandlerImpl">
         <beans:constructor-arg ref="authenService"/>

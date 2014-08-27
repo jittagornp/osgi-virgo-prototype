@@ -7,6 +7,8 @@ package th.co.geniustree.osgi.prototype.authen.security;
 
 import th.co.geniustree.osgi.prototype.authen.api.AuthenService;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
@@ -47,9 +50,46 @@ public class AuthenSuccessHandlerImpl implements AuthenticationSuccessHandler {
             redirectUrl = redirectUrl + "?sessionId=" + sessionId;
         }
 
-        strategy.sendRedirect(request, response, redirectUrl);
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-        authenService.storeAuthentication(sessionId, authentication);
+        authenService.storeAuthentication(sessionId, new Authentication() {
+
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return Collections.EMPTY_LIST;
+            }
+
+            @Override
+            public Object getCredentials() {
+                return "1234";
+            }
+
+            @Override
+            public Object getDetails() {
+                return "abcd";
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return null;
+            }
+
+            @Override
+            public boolean isAuthenticated() {
+                return true;
+            }
+
+            @Override
+            public void setAuthenticated(boolean bln) throws IllegalArgumentException {
+                
+            }
+
+            @Override
+            public String getName() {
+                return "jittagornp";
+            }
+        });
+        
+        strategy.sendRedirect(request, response, redirectUrl);
     }
 
 }
