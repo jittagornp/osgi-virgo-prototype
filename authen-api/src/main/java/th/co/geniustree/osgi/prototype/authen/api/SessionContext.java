@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author anonymous
  */
 public class SessionContext {
-
+    
     public static UserDetails getUserDetails() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authen = securityContext.getAuthentication();

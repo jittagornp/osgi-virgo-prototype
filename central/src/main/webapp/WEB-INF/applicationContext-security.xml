@@ -20,6 +20,8 @@
            auto-config="true">
 
         <intercept-url pattern="/private/*" access="isAuthenticated()" />
+        <intercept-url pattern="/admin/*" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/editor/*" access="hasRole('EDITOR')" />
         
         <logout logout-success-url="/" 
                 logout-url="http://localhost:8080/authen/signout"/>

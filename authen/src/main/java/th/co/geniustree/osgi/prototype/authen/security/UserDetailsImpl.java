@@ -5,9 +5,11 @@
  */
 package th.co.geniustree.osgi.prototype.authen.security;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -26,7 +28,8 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.EMPTY_SET;
+        GrantedAuthority ga = new SimpleGrantedAuthority("ADMIN");
+        return Arrays.asList(ga);
     }
 
     @Override

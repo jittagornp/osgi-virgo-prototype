@@ -158,8 +158,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>${project.java-version}</source>
-                    <target>${project.java-version}</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -218,6 +218,8 @@
                             org.springframework.security.web.session,
                             org.springframework.security.web.authentication,
                             org.springframework.security.core.userdetails,
+                            org.springframework.security.core.authority,
+                            org.springframework.security.core.context,
                             org.springframework.security.authentication,
                             org.springframework.security.authentication.dao,
                             

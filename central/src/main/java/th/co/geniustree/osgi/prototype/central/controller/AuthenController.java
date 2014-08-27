@@ -7,10 +7,8 @@ package th.co.geniustree.osgi.prototype.central.controller;
 
 import java.io.Serializable;
 import javax.faces.context.FacesContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.context.SecurityContextHolder;
 import th.co.geniustree.osgi.prototype.authen.api.AuthenService;
 
 /**
@@ -34,6 +32,11 @@ public class AuthenController implements Serializable {
         sessionId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sessionId");
         if (sessionId != null) {
             authentication = authenService.findAuthentication(sessionId);
+            if (authentication != null) {
+                SecurityContextHolder
+                        .getContext()
+                        .setAuthentication(authentication);
+            }
         }
     }
 
