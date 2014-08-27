@@ -33,7 +33,7 @@ public class AuthenController implements Serializable {
     public void reset() {
         sessionId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sessionId");
         if (sessionId != null) {
-            authentication = authenService.findAuthenticationBySessionId(sessionId);
+            authentication = authenService.findAuthentication(sessionId);
         }
     }
 

@@ -9,7 +9,7 @@
         Hello from Central<br/>
         
         #{authenController.reset()}
-        authentication name : #{authenController eq null ? 'null' : authenController.authentication.principal.name}<br/>
+        authentication name : #{authenController.authentication.name}<br/>
         authentication details : #{authenController.authentication.details}<br/>
         session id : #{authenController.sessionId}
     </h:body>

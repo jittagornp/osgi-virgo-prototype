@@ -5,8 +5,7 @@
  */
 package th.co.geniustree.osgi.prototype.authen.api;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 
 /**
@@ -15,29 +14,32 @@ import org.springframework.security.core.Authentication;
  */
 public class AuthenServiceImpl implements AuthenService {
 
-    private Map<String, Authentication> authenStore;
-
-    private Map<String, Authentication> getStore() {
-        if (authenStore == null) {
-            authenStore = new HashMap<String, Authentication>();
-        }
-
-        return authenStore;
-    }
+    private static final String AUTHENTICATION_SESSION = "session.authen.attr";
 
     @Override
     public void storeAuthentication(String sessionId, Authentication authen) {
-        getStore().put(sessionId, authen);
+        HttpSession session = SessionStore.findSession(sessionId);
+        if (session != null) {
+            session.setAttribute(AUTHENTICATION_SESSION, authen);
+        }
     }
 
     @Override
-    public Authentication findAuthenticationBySessionId(String sessionId) {
-        return getStore().get(sessionId);
+    public Authentication findAuthentication(String sessionId) {
+        HttpSession session = SessionStore.findSession(sessionId);
+        if (session != null) {
+            return (Authentication) session.getAttribute(AUTHENTICATION_SESSION);
+        }
+
+        return null;
     }
 
     @Override
     public void removeAuthentication(String sessionId) {
-        getStore().remove(sessionId);
+        HttpSession session = SessionStore.findSession(sessionId);
+        if (session != null) {
+            session.removeAttribute(AUTHENTICATION_SESSION);
+        }
     }
 
 }

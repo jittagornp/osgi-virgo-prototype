@@ -17,5 +17,5 @@ public interface AuthenService {
     
     public void removeAuthentication(String sessionId);
 
-    public Authentication findAuthenticationBySessionId(String sessionId);
+    public Authentication findAuthentication(String sessionId);
 }
