@@ -22,10 +22,7 @@
         <intercept-url pattern="/private/*" access="isAuthenticated()" />
         <intercept-url pattern="/admin/*" access="hasRole('ADMIN')" />
         <intercept-url pattern="/editor/*" access="hasRole('EDITOR')" />
-        
-        <logout logout-success-url="/" 
-                logout-url="http://localhost:8080/authen/signout"/>
-        
+ 
         <form-login default-target-url="/"
                     login-page="/authen"
                     password-parameter="password"
@@ -35,13 +32,12 @@
     </http>
     
     <beans:bean id="loginUrlAuthenticationEntryPoint"
-    
                 class="th.co.geniustree.osgi.prototype.central.security.DefaultLoginUrlAuthenticationEntryPoint">
         <beans:property name="loginFormUrl" value="/"/>
     </beans:bean>
     
     <beans:bean id="myLogoutFilter"
-          class="th.co.geniustree.osgi.prototype.central.security.DefaultLogoutFilter">
+                class="th.co.geniustree.osgi.prototype.central.security.DefaultLogoutFilter">
         <beans:constructor-arg index="0" 
                                name="logoutSuccessUrl" 
                                type="java.lang.String" 
@@ -53,7 +49,7 @@
             </beans:list>
         </beans:constructor-arg>
         
-        <beans:property name="filterProcessesUrl" value="/logout"/>
+        <beans:property name="filterProcessesUrl" value="/signout"/>
     </beans:bean>
 
     <beans:bean id="userDetailsService" 
