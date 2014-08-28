@@ -7,6 +7,8 @@ package th.co.geniustree.osgi.prototype.authen.security;
 
 import th.co.geniustree.osgi.prototype.authen.api.AuthenService;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +25,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 public class AuthenSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
+    private static final Logger LOG = Logger.getLogger(AuthenSuccessHandlerImpl.class.getName());
+
     private final RedirectStrategy strategy = new DefaultRedirectStrategy();
     private final AuthenService authenService;
 
@@ -37,6 +41,7 @@ public class AuthenSuccessHandlerImpl implements AuthenticationSuccessHandler {
             return;
         }
 
+        LOG.log(Level.ALL, "call AuthenSuccessHandlerImpl.onAuthenticationSuccess");
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 
         authenService.storeAuthentication(session.getId(), authentication);

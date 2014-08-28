@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package th.co.geniustree.osgi.prototype.authen.api;
+package th.co.geniustree.osgi.prototype.authen.security;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import th.co.geniustree.osgi.prototype.authen.api.SessionStore;
 
 /**
  *

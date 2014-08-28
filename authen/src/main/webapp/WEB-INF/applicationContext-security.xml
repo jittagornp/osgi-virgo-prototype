@@ -33,9 +33,11 @@
                     username-parameter="username"/>
     </http>
     
+    <!--
     <osgi:reference id="authenService" 
                     interface="th.co.geniustree.osgi.prototype.authen.api.AuthenService" 
                     availability="mandatory"/>
+                    -->
     
     <beans:bean id="authenSuccessHandler" class="th.co.geniustree.osgi.prototype.authen.security.AuthenSuccessHandlerImpl">
         <beans:constructor-arg ref="authenService"/>

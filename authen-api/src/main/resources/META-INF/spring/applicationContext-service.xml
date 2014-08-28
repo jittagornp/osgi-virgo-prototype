@@ -8,8 +8,6 @@
                            http://www.springframework.org/schema/osgi
                            http://www.springframework.org/schema/osgi/spring-osgi.xsd">
  
-    <bean id="authenService" class="th.co.geniustree.osgi.prototype.authen.api.AuthenServiceImpl"/>
-    <osgi:service ref="authenService" interface="th.co.geniustree.osgi.prototype.authen.api.AuthenService"/>
-    
+
     
 </beans>

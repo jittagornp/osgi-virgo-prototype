@@ -190,6 +190,7 @@
                             org.springframework.security.web.authentication,
                             org.springframework.security.core,
                             org.springframework.security.core.userdetails,
+                            org.springframework.security.core.authority,
                             org.springframework.security.authentication,
                             org.springframework.security.authentication.dao,
                             

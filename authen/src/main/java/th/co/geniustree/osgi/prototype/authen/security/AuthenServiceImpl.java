@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package th.co.geniustree.osgi.prototype.authen.api;
+package th.co.geniustree.osgi.prototype.authen.security;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
+import th.co.geniustree.osgi.prototype.authen.api.AuthenService;
+import th.co.geniustree.osgi.prototype.authen.api.SessionStore;
 
 /**
  *

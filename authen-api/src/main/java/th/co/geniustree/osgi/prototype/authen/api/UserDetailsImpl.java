@@ -5,9 +5,10 @@
  */
 package th.co.geniustree.osgi.prototype.authen.api;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -16,8 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class UserDetailsImpl implements UserDetails {
 
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public UserDetailsImpl(String username, String password) {
         this.username = username;
@@ -26,7 +27,8 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.EMPTY_SET;
+        GrantedAuthority ga = new SimpleGrantedAuthority("ADMIN");
+        return Arrays.asList(ga);
     }
 
     @Override
@@ -59,7 +61,4 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username){
-        this.username = username;
-    }
 }
