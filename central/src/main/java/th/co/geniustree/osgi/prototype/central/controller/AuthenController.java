@@ -6,8 +6,6 @@
 package th.co.geniustree.osgi.prototype.central.controller;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +31,14 @@ public class AuthenController implements Serializable {
     private String sessionId;
 
     public void reset() {
-        System.out.println("authenService name --> " + authenService.getClass().getCanonicalName());
-        for(Class claszz : authenService.getClass().getInterfaces()){
-            System.out.println("interface class --> " + claszz);
-        }
+        sessionId = FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .getRequestParameterMap()
+                .get("sessionId");
         
-        InvocationHandler invocationHandler = Proxy.getInvocationHandler(authenService);
-        System.out.println("invocationHandler --> " + invocationHandler);
-        
-        sessionId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("sessionId");
         if (sessionId != null) {
-            authentication = ((AuthenService) authenService).findAuthentication(sessionId);
+            authentication = authenService.findAuthentication(sessionId);
             if (authentication != null) {
                 SecurityContextHolder
                         .getContext()
