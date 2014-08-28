@@ -218,6 +218,7 @@
                             org.springframework.security.web,
                             org.springframework.security.web.session,
                             org.springframework.security.web.authentication,
+                            org.springframework.security.web.authentication.logout,
                             org.springframework.security.core.userdetails,
                             org.springframework.security.core.authority,
                             org.springframework.security.core.context,

@@ -11,12 +11,4 @@
     <osgi:reference id="authenService" 
                     interface="th.co.geniustree.osgi.prototype.authen.api.AuthenService" 
                     availability="mandatory"/>
-    
-    <!--
-    <bean id="authenController" 
-          class="th.co.geniustree.osgi.prototype.central.controller.AuthenController"
-          scope="session">
-        <property name="authenService" ref="authenService"/>
-    </bean>
-    -->
 </beans>

@@ -17,7 +17,7 @@
  
     <http  use-expressions="true" 
            authentication-manager-ref="authenManager"
-           auto-config="true">
+           entry-point-ref="loginUrlAuthenticationEntryPoint">
 
         <intercept-url pattern="/private/*" access="isAuthenticated()" />
         <intercept-url pattern="/admin/*" access="hasRole('ADMIN')" />
@@ -25,14 +25,39 @@
         
         <logout logout-success-url="/" 
                 logout-url="http://localhost:8080/authen/signout"/>
-        <form-login login-page="http://localhost:8080/authen/?redirect_url=http://localhost:8080/central/authen/"
-                    login-processing-url="http://localhost:8080/authen/signin"
-                    default-target-url="/"
+        
+        <form-login default-target-url="/"
+                    login-page="/authen"
                     password-parameter="password"
                     username-parameter="username"/>
+        
+        <custom-filter ref="myLogoutFilter" before="LOGOUT_FILTER" />
     </http>
+    
+    <beans:bean id="loginUrlAuthenticationEntryPoint"
+    
+                class="th.co.geniustree.osgi.prototype.central.security.DefaultLoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/"/>
+    </beans:bean>
+    
+    <beans:bean id="myLogoutFilter"
+          class="th.co.geniustree.osgi.prototype.central.security.DefaultLogoutFilter">
+        <beans:constructor-arg index="0" 
+                               name="logoutSuccessUrl" 
+                               type="java.lang.String" 
+                               value="/" />
+        
+        <beans:constructor-arg index="1" name="handlers">
+            <beans:list>
+                <beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+            </beans:list>
+        </beans:constructor-arg>
+        
+        <beans:property name="filterProcessesUrl" value="/logout"/>
+    </beans:bean>
 
-    <beans:bean id="userDetailsService" class="th.co.geniustree.osgi.prototype.central.security.UserDetailsServiceImpl"/>
+    <beans:bean id="userDetailsService" 
+                class="th.co.geniustree.osgi.prototype.central.security.UserDetailsServiceImpl"/>
     
     <authentication-manager alias="authenManager">
         <authentication-provider user-service-ref="userDetailsService"/>
