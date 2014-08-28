@@ -44,6 +44,12 @@ public class AuthenController implements Serializable {
                         .getContext()
                         .setAuthentication(authentication);
             }
+            
+            FacesContext
+                    .getCurrentInstance()
+                    .getExternalContext()
+                    .getSessionMap()
+                    .put("session.id", sessionId);
         }
     }
 
