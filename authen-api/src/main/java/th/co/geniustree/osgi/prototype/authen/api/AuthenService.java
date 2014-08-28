@@ -12,10 +12,6 @@ import org.springframework.security.core.Authentication;
  * @author anonymous
  */
 public interface AuthenService {
-
-    public void storeAuthentication(String sessionId, Authentication authen);
     
-    public void removeAuthentication(String sessionId);
-
     public Authentication findAuthentication(String sessionId);
 }

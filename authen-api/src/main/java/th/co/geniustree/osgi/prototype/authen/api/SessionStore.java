@@ -5,35 +5,17 @@
  */
 package th.co.geniustree.osgi.prototype.authen.api;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author anonymous
  */
-public class SessionStore {
+public interface SessionStore {
 
-    private static Map<String, HttpSession> store;
+    HttpSession findSession(String sessionId);
 
-    private static Map<String, HttpSession> getStore() {
-        if (store == null) {
-            store = new HashMap<String, HttpSession>();
-        }
+    void storeSession(String sessionId, HttpSession session);
 
-        return store;
-    }
-
-    public static HttpSession findSession(String sessionId) {
-        return getStore().get(sessionId);
-    }
-
-    public static void storeSession(String sessionId, HttpSession session) {
-        getStore().put(sessionId, session);
-    }
-
-    public static HttpSession removeSession(String sessionId) {
-        return getStore().remove(sessionId);
-    }
+    HttpSession removeSession(String sessionId);
 }

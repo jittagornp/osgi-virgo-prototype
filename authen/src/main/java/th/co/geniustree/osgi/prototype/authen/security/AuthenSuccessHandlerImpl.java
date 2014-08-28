@@ -5,10 +5,7 @@
  */
 package th.co.geniustree.osgi.prototype.authen.security;
 
-import th.co.geniustree.osgi.prototype.authen.api.AuthenService;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +15,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import th.co.geniustree.osgi.prototype.authen.api.SessionStore;
 
 /**
  *
@@ -25,13 +23,11 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 public class AuthenSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
-    private static final Logger LOG = Logger.getLogger(AuthenSuccessHandlerImpl.class.getName());
-
     private final RedirectStrategy strategy = new DefaultRedirectStrategy();
-    private final AuthenService authenService;
+    private final SessionStore store;
 
-    public AuthenSuccessHandlerImpl(AuthenService authenService) {
-        this.authenService = authenService;
+    public AuthenSuccessHandlerImpl(SessionStore store) {
+        this.store = store;
     }
 
     @Override
@@ -41,10 +37,8 @@ public class AuthenSuccessHandlerImpl implements AuthenticationSuccessHandler {
             return;
         }
 
-        LOG.log(Level.ALL, "call AuthenSuccessHandlerImpl.onAuthenticationSuccess");
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-
-        authenService.storeAuthentication(session.getId(), authentication);
+        storeAuthentication(session.getId(), authentication);
         strategy.sendRedirect(request, response, getRedirectUrl(request));
     }
 
@@ -58,5 +52,14 @@ public class AuthenSuccessHandlerImpl implements AuthenticationSuccessHandler {
         }
 
         return redirectUrl;
+    }
+
+    private void storeAuthentication(String sessionId, Authentication authentication) {
+        if (store != null) {
+            HttpSession session = store.findSession(sessionId);
+            if (session != null) {
+                session.setAttribute("session.authen.attr", authentication);
+            }
+        }
     }
 }

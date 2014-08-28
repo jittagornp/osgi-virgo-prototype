@@ -9,6 +9,7 @@
         <module>central</module>
         <module>authen</module>
         <module>authen-api</module>
+        <module>authen-impl</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

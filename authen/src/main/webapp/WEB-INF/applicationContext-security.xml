@@ -26,6 +26,7 @@
         
         <logout logout-success-url="/" 
                 logout-url="/signout"/>
+        
         <form-login login-page="/"
                     authentication-success-handler-ref="authenSuccessHandler"
                     login-processing-url="/signin"
@@ -33,16 +34,17 @@
                     username-parameter="username"/>
     </http>
     
-    <!--
-    <osgi:reference id="authenService" 
-                    interface="th.co.geniustree.osgi.prototype.authen.api.AuthenService" 
-                    availability="mandatory"/>
-                    -->
+    <osgi:reference id="sessionStore" 
+                interface="th.co.geniustree.osgi.prototype.authen.api.SessionStore" 
+                availability="mandatory"/>
     
-    <beans:bean id="authenSuccessHandler" class="th.co.geniustree.osgi.prototype.authen.security.AuthenSuccessHandlerImpl">
-        <beans:constructor-arg ref="authenService"/>
+    <beans:bean id="authenSuccessHandler" 
+                class="th.co.geniustree.osgi.prototype.authen.security.AuthenSuccessHandlerImpl">
+        <beans:constructor-arg ref="sessionStore"/>
     </beans:bean>
-    <beans:bean id="userDetailsService" class="th.co.geniustree.osgi.prototype.authen.security.UserDetailsServiceImpl"/>
+    
+    <beans:bean id="userDetailsService" 
+                class="th.co.geniustree.osgi.prototype.authen.security.UserDetailsServiceImpl"/>
     
     <authentication-manager alias="authenManager">
         <authentication-provider user-service-ref="userDetailsService"/>

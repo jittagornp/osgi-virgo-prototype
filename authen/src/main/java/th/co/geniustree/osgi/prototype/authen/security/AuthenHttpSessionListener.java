@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import th.co.geniustree.osgi.prototype.authen.api.SessionStore;
+import th.co.geniustree.osgi.prototype.authen.util.SpringUtils;
 
 /**
  *
@@ -19,12 +20,18 @@ public class AuthenHttpSessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-        SessionStore.storeSession(se.getSession().getId(), se.getSession());
+        SessionStore store = SpringUtils.getBean(se.getSession().getServletContext(), SessionStore.class);
+        if (store != null) {
+            store.storeSession(se.getSession().getId(), se.getSession());
+        }
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        SessionStore.removeSession(se.getSession().getId());
+        SessionStore store = SpringUtils.getBean(se.getSession().getServletContext(), SessionStore.class);
+        if (store != null) {
+            store.removeSession(se.getSession().getId());
+        }
     }
 
 }

@@ -2,31 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>osgi-virgo-prototype</artifactId>
         <groupId>th.co.geniustree.osgi.prototype</groupId>
+        <artifactId>osgi-virgo-prototype</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <groupId>th.co.geniustree.osgi.prototype</groupId>
-    <artifactId>authen</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-
-    <name>authen</name>
-
+    <artifactId>authen-impl</artifactId>
+    <packaging>jar</packaging>
     <properties>
-        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.java-version>1.6</project.java-version>
         <org.springframework-version>3.1.0.RELEASE</org.springframework-version>
         <org.springframework.security-version>3.1.0.RELEASE</org.springframework.security-version>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
-
+    
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>th.co.geniustree.osgi.prototype</groupId>
             <artifactId>authen-api</artifactId>
-            <version>${project.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         
         <dependency>
@@ -150,33 +143,18 @@
         
         <!-- spring ******************************************************** --> 
     </dependencies>
-
+    
     <build>
-        <finalName>authen-${project.version}</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
                 <configuration>
-                    <source>${project.java-version}</source>
-                    <target>${project.java-version}</target>
-                    <compilerArguments>
-                        <endorseddirs>${endorsed.dir}</endorseddirs>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <archive>
+                    <archive>  
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
+                    </archive> 
                 </configuration>
-            </plugin>
+            </plugin>  
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -197,9 +175,8 @@
                         <supportedProjectType>war</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
-                        <Web-ContextPath>/authen</Web-ContextPath>
                         <Export-Package>
-                            th.co.geniustree.osgi.prototype.authen.security
+                            th.co.geniustree.osgi.prototype.authen.impl
                         </Export-Package>
                         <Import-Package>
                             org.springframework.util,
@@ -208,13 +185,12 @@
                             org.springframework.web.filter,
                             org.springframework.web.jsf.el,
                             org.springframework.web.context.request,
-                            org.springframework.web.context.support,
-                            org.springframework.web.jsf,
                             org.springframework.context.config,
                             org.springframework.context.annotation,
                             org.springframework.stereotype,
                             org.springframework.beans.factory,
                             org.springframework.beans.factory.xml,
+                            org.springframework.beans.factory.annotation,
                             org.springframework.security,
                             org.springframework.security.config,
                             org.springframework.security.web,
@@ -222,9 +198,9 @@
                             org.springframework.security.web.authentication,
                             org.springframework.security.core,
                             org.springframework.security.core.userdetails,
+                            org.springframework.security.core.authority,
                             org.springframework.security.authentication,
                             org.springframework.security.authentication.dao,
-                            org.springframework.security.core.authority,
                             
                             org.eclipse.virgo.web.dm,
                             
@@ -267,19 +243,9 @@
                             org.apache.commons.logging,
                             th.co.geniustree.osgi.prototype.authen.api
                         </Import-Package>
-                        <Bundle-ClassPath>WEB-INF/classes</Bundle-ClassPath>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
-    <repositories>
-        <repository>
-            <url>http://repository.primefaces.org/</url>
-            <id>PrimeFaces-maven-lib</id>
-            <layout>default</layout>
-            <name>Repository for library PrimeFaces-maven-lib</name>
-        </repository>
-    </repositories>
 </project>

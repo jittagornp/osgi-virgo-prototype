@@ -9,5 +9,17 @@
                            http://www.springframework.org/schema/osgi/spring-osgi.xsd">
  
 
-
+    <bean id="authenService" 
+          class="th.co.geniustree.osgi.prototype.authen.impl.AuthenServiceImpl"/>
+    
+    <osgi:service ref="authenService" 
+                  interface="th.co.geniustree.osgi.prototype.authen.api.AuthenService"/>
+    
+    
+    <bean id="sessionStore" 
+          class="th.co.geniustree.osgi.prototype.authen.impl.SessionStoreImpl"/>
+    
+    <osgi:service ref="sessionStore" 
+                  interface="th.co.geniustree.osgi.prototype.authen.api.SessionStore"/>
+    
 </beans>

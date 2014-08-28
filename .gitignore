@@ -13,3 +13,5 @@ hs_err_pid*
 /central/target/
 /authen/target/
 /authen-api/target/
+/authen-api - Copy/target/
+/authen-impl/target/

@@ -9,7 +9,6 @@ package th.co.geniustree.osgi.prototype.authen.security;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import th.co.geniustree.osgi.prototype.authen.api.UserDetailsImpl;
 
 /**
  *
