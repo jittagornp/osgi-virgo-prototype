@@ -24,7 +24,7 @@
 
         <intercept-url pattern="/account/*" access="isAuthenticated()" />
         
-        <logout logout-success-url="/" 
+        <logout success-handler-ref="logoutSuccessHandler"
                 logout-url="/signout"/>
         
         <form-login login-page="/"
@@ -35,12 +35,16 @@
     </http>
     
     <osgi:reference id="sessionStore" 
-                interface="th.co.geniustree.osgi.prototype.authen.api.SessionStore" 
-                availability="mandatory"/>
+                    interface="th.co.geniustree.osgi.prototype.authen.api.SessionStore" 
+                    availability="mandatory"/>
     
     <beans:bean id="authenSuccessHandler" 
                 class="th.co.geniustree.osgi.prototype.authen.security.AuthenSuccessHandlerImpl">
         <beans:constructor-arg ref="sessionStore"/>
+    </beans:bean>
+    
+    <beans:bean id="logoutSuccessHandler"
+                    class="th.co.geniustree.osgi.prototype.authen.security.DefaultLogoutSuccessHandler">
     </beans:bean>
     
     <beans:bean id="userDetailsService" 
