@@ -212,6 +212,7 @@
                             org.springframework.stereotype,
                             org.springframework.beans.factory,
                             org.springframework.beans.factory.xml,
+                            org.springframework.beans.factory.annotation,
                             org.springframework.security,
                             org.springframework.security.config,
                             org.springframework.security.web,
