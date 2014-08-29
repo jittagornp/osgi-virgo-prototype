@@ -35,16 +35,19 @@
     </http>
     
     <osgi:reference id="sessionStore" 
-                    interface="th.co.geniustree.osgi.prototype.authen.api.SessionStore" 
-                    availability="mandatory"/>
+                    interface="th.co.geniustree.osgi.prototype.authen.api.SessionStore"/>
+    
+    <osgi:reference id="authenStore" 
+                        interface="th.co.geniustree.osgi.prototype.authen.api.AuthenStore"/>
     
     <beans:bean id="authenSuccessHandler" 
                 class="th.co.geniustree.osgi.prototype.authen.security.AuthenSuccessHandlerImpl">
-        <beans:constructor-arg ref="sessionStore"/>
+        <beans:constructor-arg ref="authenStore"/>
     </beans:bean>
     
     <beans:bean id="logoutSuccessHandler"
-                    class="th.co.geniustree.osgi.prototype.authen.security.DefaultLogoutSuccessHandler">
+                class="th.co.geniustree.osgi.prototype.authen.security.DefaultLogoutSuccessHandler">
+        <beans:constructor-arg ref="sessionStore"/> 
     </beans:bean>
     
     <beans:bean id="userDetailsService" 

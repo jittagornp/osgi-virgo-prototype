@@ -11,7 +11,7 @@
         #{authenController.reset()}
         authentication name : #{authenController.authentication.name}<br/>
         authentication details : #{authenController.authentication.details}<br/>
-        session id : #{authenController.sessionId}
+        session id : #{request.getSession().getAttribute('session.id')}
     </h:body>
 </html>
 

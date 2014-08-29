@@ -5,6 +5,8 @@
  */
 package th.co.geniustree.osgi.prototype.authen.api;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 
 /**
@@ -13,5 +15,17 @@ import org.springframework.security.core.Authentication;
  */
 public interface AuthenService {
     
-    public Authentication findAuthentication(String sessionId);
+    String getSignInUrl();
+    
+    String getSignOutUrl();
+
+    Authentication findAuthentication(String sessionId);
+
+    void signIn(String callbackUrl);
+    
+    void signIn(HttpServletResponse response, String callbackUrl);
+
+    void signOut(String callbackUrl);
+    
+    void signOut(HttpServletRequest request, HttpServletResponse response, String callbackUrl);
 }

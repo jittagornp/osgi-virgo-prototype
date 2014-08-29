@@ -9,8 +9,10 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import th.co.geniustree.osgi.prototype.authen.api.SessionStore;
 
 /**
  *
@@ -18,26 +20,55 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  */
 public class DefaultLogoutSuccessHandler implements LogoutSuccessHandler {
 
-    @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    private static final String DEFAULT_REDIRECT_URL = "/";
+    private final SessionStore store;
 
-        if (authentication != null && authentication.getDetails() != null) {
-            try {
-                request.getSession().invalidate();
-                System.out.println("User Successfully Logout");
-                //you can add more codes here when the user successfully logs out,
-                //such as updating the database for last active.
-            } catch (Exception e) {
-                e.printStackTrace();
-                e = null;
-            }
-        }
-        
-        System.out.println("redirect_url --> " + request.getParameter("redirect_url"));
-
-        response.setStatus(HttpServletResponse.SC_OK);
-        //redirect to login
-        response.sendRedirect("http://localhost:8080/central/");
+    public DefaultLogoutSuccessHandler(SessionStore store) {
+        this.store = store;
     }
 
+    @Override
+    public void onLogoutSuccess(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Authentication authentication
+    ) throws IOException, ServletException {
+        
+        String redirectUrl = request.getParameter("redirect_url");
+        String sessionId = request.getParameter("sessionId");
+
+        if (store != null && sessionId != null) {
+            HttpSession session = store.findSession(sessionId);
+            if (session != null) {
+                store.removeSession(sessionId);
+                invalidSessionAndRedirect(
+                        session,
+                        response,
+                        redirectUrl
+                );
+            }
+        } else {
+            invalidSessionAndRedirect(
+                    request.getSession(),
+                    response,
+                    DEFAULT_REDIRECT_URL
+            );
+        }
+    }
+
+    private void invalidSessionAndRedirect(
+            HttpSession session,
+            HttpServletResponse response,
+            String redirectUrl
+    ) throws IOException {
+        try {
+            session.invalidate();
+        } catch (Exception ex) {
+            //swallow exception
+            ex.printStackTrace();
+        } finally {
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.sendRedirect(redirectUrl);
+        }
+    }
 }

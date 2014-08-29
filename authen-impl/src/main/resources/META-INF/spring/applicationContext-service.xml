@@ -16,6 +16,13 @@
                   interface="th.co.geniustree.osgi.prototype.authen.api.AuthenService"/>
     
     
+    <bean id="authenStore" 
+              class="th.co.geniustree.osgi.prototype.authen.impl.AuthenStoreImpl"/>
+    
+    <osgi:service ref="authenStore" 
+                  interface="th.co.geniustree.osgi.prototype.authen.api.AuthenStore"/>
+    
+    
     <bean id="sessionStore" 
           class="th.co.geniustree.osgi.prototype.authen.impl.SessionStoreImpl"/>
     

@@ -23,17 +23,13 @@
         <intercept-url pattern="/admin/*" access="hasRole('ADMIN')" />
         <intercept-url pattern="/editor/*" access="hasRole('EDITOR')" />
  
-        <logout logout-url="/signout"
-                success-handler-ref="logoutSuccessHandler"/>
+        <logout logout-url="/logout"
+                logout-success-url="/"/>
         
         <form-login default-target-url="/"
                     login-page="/authen"
                     password-parameter="password"
                     username-parameter="username"/>
-        
-        <!--
-        <custom-filter ref="myLogoutFilter" before="LOGOUT_FILTER" />
-        -->
     </http>
     
     <beans:bean id="loginUrlAuthenticationEntryPoint"
@@ -41,28 +37,6 @@
         <beans:property name="loginFormUrl" value="/"/>
     </beans:bean>
     
-    <beans:bean id="logoutSuccessHandler"
-                class="th.co.geniustree.osgi.prototype.central.security.DefaultLogoutSuccessHandler">
-    </beans:bean>
-    
-    <!--
-    <beans:bean id="myLogoutFilter"
-                class="th.co.geniustree.osgi.prototype.central.security.DefaultLogoutFilter">
-        <beans:constructor-arg index="0" 
-                               name="logoutSuccessUrl" 
-                               type="java.lang.String" 
-                               value="/" />
-        
-        <beans:constructor-arg index="1" name="handlers">
-            <beans:list>
-                <beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
-            </beans:list>
-        </beans:constructor-arg>
-        
-        <beans:property name="filterProcessesUrl" value="/signout"/>
-    </beans:bean>
-    -->
-
     <beans:bean id="userDetailsService" 
                 class="th.co.geniustree.osgi.prototype.central.security.UserDetailsServiceImpl"/>
     

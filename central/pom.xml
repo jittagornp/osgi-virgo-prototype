@@ -204,8 +204,10 @@
                             org.springframework.web,
                             org.springframework.web.context,
                             org.springframework.web.filter,
+                            org.springframework.web.jsf,
                             org.springframework.web.jsf.el,
                             org.springframework.web.context.request,
+                            org.springframework.web.context.support,
                             org.springframework.security.core,
                             org.springframework.context.config,
                             org.springframework.context.annotation,
@@ -224,7 +226,7 @@
                             org.springframework.security.core.context,
                             org.springframework.security.authentication,
                             org.springframework.security.authentication.dao,
-                            
+
                             org.eclipse.virgo.web.dm,
                             
                             javax.el,

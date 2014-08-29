@@ -18,7 +18,23 @@ public class SessionStoreImpl implements SessionStore {
 
     private Map<String, HttpSession> store;
 
-    private Map<String, HttpSession> getStore() {
+    @Override
+    public HttpSession findSession(String sessionId) {
+        return findAll().get(sessionId);
+    }
+
+    @Override
+    public void storeSession(String sessionId, HttpSession session) {
+        findAll().put(sessionId, session);
+    }
+
+    @Override
+    public HttpSession removeSession(String sessionId) {
+        return findAll().remove(sessionId);
+    }
+
+    @Override
+    public Map<String, HttpSession> findAll() {
         if (store == null) {
             store = new HashMap<String, HttpSession>();
         }
@@ -27,17 +43,7 @@ public class SessionStoreImpl implements SessionStore {
     }
 
     @Override
-    public HttpSession findSession(String sessionId) {
-        return getStore().get(sessionId);
-    }
-
-    @Override
-    public void storeSession(String sessionId, HttpSession session) {
-        getStore().put(sessionId, session);
-    }
-
-    @Override
-    public HttpSession removeSession(String sessionId) {
-        return getStore().remove(sessionId);
+    public void clearSession() {
+        findAll().clear();
     }
 }

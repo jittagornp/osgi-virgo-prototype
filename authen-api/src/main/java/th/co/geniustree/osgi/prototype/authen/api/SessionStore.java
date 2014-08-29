@@ -5,6 +5,7 @@
  */
 package th.co.geniustree.osgi.prototype.authen.api;
 
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -18,4 +19,8 @@ public interface SessionStore {
     void storeSession(String sessionId, HttpSession session);
 
     HttpSession removeSession(String sessionId);
+    
+    Map<String, HttpSession> findAll();
+    
+    void clearSession();
 }
