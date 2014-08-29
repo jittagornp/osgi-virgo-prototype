@@ -18,7 +18,7 @@ import th.co.geniustree.osgi.prototype.central.util.SpringUtils;
  *
  * @author anonymous
  */
-@WebServlet(urlPatterns = "/signout")
+@WebServlet(urlPatterns = "/authen/signout")
 public class LogoutServlet extends HttpServlet {
 
     private static final String CALLBACK_URL = "http://localhost:8080/central/logout";
